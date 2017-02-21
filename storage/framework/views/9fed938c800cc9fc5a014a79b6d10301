@@ -1,0 +1,14 @@
+
+
+<?php $__env->startSection('title', 'ETSIemplea - UHU'); ?>
+
+<?php $__env->startSection('content'); ?>
+
+	<div class="row">
+		<div class="input-field col s12">
+		  <p align=center>A partir de ahora no recibirá más correos, si desea volver a recibirlos descargue nuestra App.</p>
+		</div>
+	</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.templateuns', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

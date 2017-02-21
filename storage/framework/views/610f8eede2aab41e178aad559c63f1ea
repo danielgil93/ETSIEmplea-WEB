@@ -1,0 +1,154 @@
+<?php
+session_start();
+?>
+
+
+
+<?php $__env->startSection('title', 'ETSIemplea - UHU'); ?>
+
+<?php $__env->startSection('content'); ?>
+
+    <div class="container">
+      <div class="section">
+        <?php echo Form::open(['url' => 'confirm', 'id'=>'formOferta']); ?>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">account_circle</i>
+                  <input id="company_name" name="company_name" type="text" class="validate" value="<?php if(isset($_SESSION['name'])){echo $_SESSION['name'];}?>" required>
+                  <label for="company_name">Nombre de la Empresa</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">email</i>
+                  <input id="email" name="email" type="email" class="validate" value="<?php if(isset($_SESSION['mail'])){echo $_SESSION['mail'];}?>" required>
+                  <label for="email" data-error="Correo&nbsp;no&nbsp;válido">Email</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">phone</i>
+                  <input id="telephone" name="telephone" type="tel" class="validate" value="<?php if(isset($_SESSION['phone'])){echo $_SESSION['phone'];}?>" required>
+                  <label for="telephone">Teléfono</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s10">
+                  <i class="material-icons prefix <?php if(isset($_SESSION['select'])){echo 'active';}?>">view_headline</i>
+                  <select multiple id="select1" name="select[]" class="validate" required>
+                    <option value="" disabled selected>Elija las Titulaciones</option>
+                    <?php 
+                      $destination = array('Agrícola', 'Informática', 'Explotación de Minas y recursos Energéticos', 'Eléctrica', 'Electrónica Industrial', 'Energética', 'Forestal y del Medio Natural', 'Mecánica', 'Química Industrial' );
+
+					  if(isset($_SESSION['select'])) {
+						foreach ($destination as $key => $value) {
+							if(in_array($value, $_SESSION['select']))
+								echo '<option value="'.$value.'" selected="selected">Ingeniería '.$value.'</option>';
+							else
+								echo '<option value="'.$value.'">Ingeniería '.$value.'</option>';
+						}
+					  } else {
+						  foreach ($destination as $key => $value) {
+							echo '<option value="'.$value.'">Ingeniería '.$value.'</option>';
+						  }
+					  }
+                    ?>
+                  </select>
+                  <label>Destinatarios</label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix <?php if(isset($_SESSION['type'])){echo 'active';}?>">work</i>
+                  <label>Tipo de Oferta</label>
+                  <div class="radioDiv">
+                      <input required class="validate" name="TipoOferta" type="radio" id="Oferta de Trabajo" value="Oferta de Trabajo"
+                      onclick="$(this).parent().parent().find('i').addClass('active');" <?php if(isset($_SESSION['type']) && ($_SESSION['type'] == "Oferta de Trabajo")){echo 'checked="checked"';}?>/>
+                      <label for="Oferta de Trabajo">Oferta de Trabajo</label>
+                    <br/>
+                      <input name="TipoOferta" type="radio" id="Beca de Formación" value="Beca de Formación"
+                      onclick="$(this).parent().parent().find('i').addClass('active');" <?php if(isset($_SESSION['type']) && ($_SESSION['type'] == "Beca de Formación")){echo 'checked="checked"';}?>/>
+                      <label for="Beca de Formación">Beca de Formación</label>
+                    <br/>
+                      <input name="TipoOferta" type="radio" id="Curso de Formación" value="Curso de Formación"
+                      onclick="$(this).parent().parent().find('i').addClass('active');" <?php if(isset($_SESSION['type']) && ($_SESSION['type'] == "Curso de Formación")){echo 'checked="checked"';}?>/>
+                      <label for="Curso de Formación">Curso de Formación</label>
+                    <br/>
+                      <input name="TipoOferta" type="radio" id="Concurso" value="Concurso"
+                      onclick="$(this).parent().parent().find('i').addClass('active');" <?php if(isset($_SESSION['type']) && ($_SESSION['type'] == "Concurso")){echo 'checked="checked"';}?>/>
+                      <label for="Concurso">Concurso</label>
+                    <br/>
+                      <input name="TipoOferta" type="radio" id="Otros" value="Oferta"
+                      onclick="$(this).parent().parent().find('i').addClass('active');" <?php if(isset($_SESSION['type']) && ($_SESSION['type'] == "Oferta")){echo 'checked="checked"';}?>/>
+                      <label for="Otros">Otros</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">mode_edit</i>
+                  <textarea id="descript" name="descript" class="ckeditor materialize-textarea" required><?php if(isset($_SESSION['descripcion'])){echo $_SESSION['descripcion'];}?></textarea>
+                  <label for="descript">Descripción de la Oferta&nbsp;&nbsp;&nbsp;
+                  <i class="tiny material-icons" onmouseover="nhpup.popup('No se permiten descripciones con mas de 1500 carácteres, si desea una descripción más extensa añádala en los enlaces.');">live_help</i></label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix active">http</i>
+                  <textarea id="url" name="url" class="materialize-textarea" ><?php if(isset($_SESSION['enlaces'])){echo $_SESSION['enlaces'];}?></textarea>
+                  <label for="url">
+                  Enlaces de Interés&nbsp;&nbsp;&nbsp;
+                  <i class="tiny material-icons" onmouseover="nhpup.popup('No se permite la subida de archivos adjuntos, si desea incluir algún documento deberá hacerlo a través de un enlace.');">live_help</i></label>
+
+                </div>
+              </div>
+
+			  
+			  <div class="row">
+				<div class="g-recaptcha" data-sitekey="<?php echo e(env('RE_CAP_SITE')); ?>"></div>
+			  </div>
+			  
+			  
+              <div class="row">
+                <div style="float: right;">
+                  <a class="modal-trigger waves-effect waves-light btn" href="#preview">
+                    <i class="material-icons left">visibility</i>Previsualizar
+                  </a>
+                  <button class="btn btn-primary waves-effect waves-light" id="submit-form" type="submit">Enviar
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </div>
+
+              <br/>
+          <?php echo Form::close(); ?>
+
+      </div>
+    </div>
+
+    <div class="parallax-container valign-wrapper">
+      <div class="section no-pad-bot"></div>
+      <div class="parallax"><img src="images/background.jpg" alt="Unsplashed background img 3"></div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="preview" class="modal modal-fixed-footer">
+      <div class="modal-content">
+         <?php echo $__env->make('preview', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+      </div>
+      <div class="modal-footer">
+        <label for="submit-form" class="modal-action modal-close waves-effect waves-green btn-flat">Enviar</label>
+        <label class="modal-action modal-close waves-effect waves-green btn-flat ">Cerrar</a>
+      </div>
+    </div>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layouts.template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

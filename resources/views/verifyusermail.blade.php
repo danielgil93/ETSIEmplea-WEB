@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+  <table style="padding: 20px;">
+    <tbody>
+      <tr>
+        <td><span style="font-size:20px; color:#8A0B0B; font-weight:bold; border-bottom:1px solid #d0d0d0; padding-bottom:10px;">Verifica tu cuenta</span></td>
+      </tr>
+      <tr>
+        <td>
+          <br><br>Pulsa en el enlace que aparece abajo para activar tu cuenta de ETSIEmplea. Si no hiciste esta petición, puedes ignorar este mensaje.
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><a style="text-decoration: none; margin-top: 10px;" href='{!! $url !!}'>Activar Cuenta</a></b>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <footer style="font-style: italic; margin: 20px; text-align: center; padding-top: 10px; border-top: 2px solid black;">
+    Para más información póngase en contacto con el webmaster de la aplicación en el siguiente email: 
+    <a href=mailto:etsiemplea@uhu.es>etsiemplea@uhu.es</a><br>
+    Muchas gracias.
+    <br><br>
+    <b><span style="font-size:10px;">ETSIEmplea - Escuela Técnica Superior de Ingeniería - Universidad de Huelva</span></b> 
+  </footer>
+</body>
+</html>
